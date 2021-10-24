@@ -51,10 +51,20 @@ if (isset($_SESSION['Id']) && isset($_SESSION['Username'])) {
           <a class="nav-link disabled">Disabled</a>
         </li>
       </ul>
-      <form class="d-flex">
+      <form method="post">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
+      <?php
+      if(isset($_POST['search'])) {
+        require "Search.php";
+        if(count($results) >0){
+          foreach ($results as $r) {
+           echo "<div>" . $r['Name'] . " - " . $r["Email"] . "</div>";
+          }
+        }else { echo "<div> No results  found.</div>"; }
+      }
+      ?>
     </div>
   </div>
 </nav>
